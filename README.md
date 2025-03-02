@@ -1,5 +1,7 @@
 # networkx-mermaid
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2d6220d81d1a48cba762842eb88fee41)](https://app.codacy.com/gh/erivlis/networkx-mermaid?utm_source=github.com&utm_medium=referral&utm_content=erivlis/networkx-mermaid&utm_campaign=Badge_Grade)
+
 Create a Mermaid graph from a NetworkX graph
 
 ## Quick Start
