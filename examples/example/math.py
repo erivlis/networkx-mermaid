@@ -8,7 +8,6 @@ import networkx as nx
 
 
 def create_graph():
-    # colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#00FFFF', '#FF00FF']
     pastel_colors = ["#FFCCCC", "#CCFFCC", "#CCCCFF", "#FFFFCC", "#CCFFFF", "#FFCCFF"]
     graphs: list[nx.Graph] = [nx.tetrahedral_graph(), nx.dodecahedral_graph()]
 
