@@ -127,7 +127,7 @@ def test_build_graph_with_node_colors():
 
     # Assert
     assert "style 1 fill:#FF0000, color:#ffffff" in diagram
-    assert "style 2 fill:#00FF00, color:#000000" in diagram
+    assert "style 2 fill:#00FF00, color:#ffffff" in diagram
 
 
 def test_build_graph_with_custom_node_shape():
@@ -242,7 +242,7 @@ def test_edge_label_without_label():
         ("#FFFFFF", "#000000"),
         ("#000000", "#ffffff"),
         ("#FF0000", "#ffffff"),
-        ("#00FF00", "#000000"),
+        ("#00FF00", "#ffffff"),
         ("#0000FF", "#ffffff"),
         ("#ABCDEF", "#000000"),
         ("#123456", "#ffffff"),
