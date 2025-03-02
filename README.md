@@ -13,7 +13,7 @@ Create a Mermaid graph from a NetworkX graph
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
 
-[![Snyk](https://snyk.io/test/github/erivlis/Graphinate/badge.svg)](https://snyk.io/test/github/erivlis/graphinate)
+[![Snyk](https://snyk.io/test/github/erivlis/networkx-mermaid/badge.svg)](https://snyk.io/test/github/erivlis/networkx-mermaid)
 
 
 ## Example
