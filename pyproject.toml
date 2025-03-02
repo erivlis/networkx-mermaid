@@ -32,8 +32,8 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://erivlis.github.io/networkx-mermaid"
-#"Documentation" = "https://erivlis.github.io/networkx-mermaid"
+"Homepage" = "https://github.com/erivlis/networkx-mermaid"
+"Documentation" = "https://github.com/erivlis/networkx-mermaid"
 "Bug Tracker" = "https://github.com/erivlis/networkx-mermaid/issues"
 "Source" = "https://github.com/erivlis/networkx-mermaid"
 
@@ -73,7 +73,7 @@ allow-direct-references = true
 installer = "uv"
 
 #[tool.hatch.build.targets.wheel]
-#packages = ["src/graphinate"]
+#packages = ["src/networkx-mermaid"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
