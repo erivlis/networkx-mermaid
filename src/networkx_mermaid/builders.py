@@ -1,8 +1,8 @@
-from enum import Enum
 from typing import Any
 
 import networkx as nx
 
+from .models import DiagramNodeShape, DiagramOrientation
 from .typing import MermaidDiagram
 
 DEFAULT_LAYOUT = "dagre"
@@ -46,57 +46,15 @@ def _graph_title(graph: nx.Graph) -> str:
     return f"title: {graph.name}\n" if graph.name else ""
 
 
-class Layout(Enum):
-    """Layout of a Mermaid diagram"""
-    DAGRE = 'dagre'
-    ELK = 'elk'
-
-
-class Look(Enum):
-    """Look of a Mermaid diagram"""
-    NEO = 'neo'
-
-
-class Theme(Enum):
-    """Theme of a Mermaid diagram"""
-    NEUTRAL = 'neutral'
-
-
-class Orientation(Enum):
-    """Orientation of a Mermaid graph"""
-    TOP_DOWN = 'TD'
-    BOTTOM_UP = 'BT'
-    LEFT_RIGHT = 'LR'
-    RIGHT_LEFT = 'RL'
-
-
-class NodeShape(Enum):
-    """Shapes of a Mermaid graph node"""
-    DEFAULT = ("(", ")")
-    RECTANGLE = ("[", "]")
-    ROUND_RECTANGLE = ("([", "])")
-    SUBROUTINE = ("[[", "]]")
-    DATABASE = ("[(", ")]")
-    CIRCLE = ("((", "))")
-    DOUBLE_CIRCLE = ("(((", ")))")
-    FLAG = (">", "]")
-    DIAMOND = ("{", "}")
-    HEXAGON = ("{{", "}}")
-    PARALLELOGRAM = ("[/", "/]")
-    PARALLELOGRAM_ALT = ("[\\", "\\]")
-    TRAPEZOID = ("[/", "\\]")
-    TRAPEZOID_ALT = ("[\\", "/]")
-
-
-class MermaidDiagramBuilder:
+class DiagramBuilder:
     """
     A class to generate Mermaid diagrams from NetworkX graphs.
     """
 
     def __init__(
             self,
-            orientation: Orientation = Orientation.LEFT_RIGHT,
-            node_shape: NodeShape = NodeShape.DEFAULT,
+            orientation: DiagramOrientation = DiagramOrientation.LEFT_RIGHT,
+            node_shape: DiagramNodeShape = DiagramNodeShape.DEFAULT,
             layout: str = DEFAULT_LAYOUT,
             look: str = DEFAULT_LOOK,
             theme: str = DEFAULT_THEME,
@@ -117,9 +75,9 @@ class MermaidDiagramBuilder:
         self.look = look
         self.theme = theme
 
-        if not isinstance(orientation, Orientation):
+        if not isinstance(orientation, DiagramOrientation):
             raise TypeError("orientation must be a valid Orientation enum")
-        if not isinstance(node_shape, NodeShape):
+        if not isinstance(node_shape, DiagramNodeShape):
             raise TypeError("node_shape must be a valid NodeShape enum")
 
     def build(self, graph: nx.Graph) -> MermaidDiagram:
@@ -156,4 +114,3 @@ class MermaidDiagramBuilder:
             f"{nodes}\n"
             f"{edges}"
         )
-

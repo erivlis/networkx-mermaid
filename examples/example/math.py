@@ -2,7 +2,8 @@ from tempfile import TemporaryDirectory
 
 import networkx as nx
 
-from networkx_mermaid.builders import MermaidDiagramBuilder, NodeShape, Orientation
+from networkx_mermaid import DiagramNodeShape, DiagramOrientation
+from networkx_mermaid.builders import DiagramBuilder
 from networkx_mermaid.formatters import html, markdown
 from networkx_mermaid.typing import MermaidDiagram
 
@@ -22,9 +23,9 @@ def create_graph():
 
 
 def create_builder():
-    builder = MermaidDiagramBuilder(
-        orientation=Orientation.LEFT_RIGHT,
-        node_shape=NodeShape.ROUND_RECTANGLE,
+    builder = DiagramBuilder(
+        orientation=DiagramOrientation.LEFT_RIGHT,
+        node_shape=DiagramNodeShape.ROUND_RECTANGLE,
     )
     return builder
 

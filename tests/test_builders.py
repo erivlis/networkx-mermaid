@@ -1,13 +1,12 @@
 import networkx as nx
 import pytest
 
+from networkx_mermaid import DiagramNodeShape, DiagramOrientation
 from networkx_mermaid.builders import (
     DEFAULT_LAYOUT,
     DEFAULT_LOOK,
     DEFAULT_THEME,
-    MermaidDiagramBuilder,
-    NodeShape,
-    Orientation,
+    DiagramBuilder,
     _contrast_color,
     _edge_label,
     _graph_title,
@@ -17,11 +16,11 @@ from networkx_mermaid.builders import (
 
 def test_default_initialization():
     # Arrange
-    builder = MermaidDiagramBuilder()
+    builder = DiagramBuilder()
 
     # Act & Assert
-    assert builder.orientation == Orientation.LEFT_RIGHT
-    assert builder.node_shape == NodeShape.DEFAULT
+    assert builder.orientation == DiagramOrientation.LEFT_RIGHT
+    assert builder.node_shape == DiagramNodeShape.DEFAULT
     assert builder.layout == DEFAULT_LAYOUT
     assert builder.look == DEFAULT_LOOK
     assert builder.theme == DEFAULT_THEME
@@ -29,17 +28,17 @@ def test_default_initialization():
 
 def test_custom_initialization():
     # Arrange
-    builder = MermaidDiagramBuilder(
-        orientation=Orientation.TOP_DOWN,
-        node_shape=NodeShape.RECTANGLE,
+    builder = DiagramBuilder(
+        orientation=DiagramOrientation.TOP_DOWN,
+        node_shape=DiagramNodeShape.RECTANGLE,
         layout="elk",
         look="neo",
         theme="neutral"
     )
 
     # Act & Assert
-    assert builder.orientation == Orientation.TOP_DOWN
-    assert builder.node_shape == NodeShape.RECTANGLE
+    assert builder.orientation == DiagramOrientation.TOP_DOWN
+    assert builder.node_shape == DiagramNodeShape.RECTANGLE
     assert builder.layout == "elk"
     assert builder.look == "neo"
     assert builder.theme == "neutral"
@@ -48,19 +47,19 @@ def test_custom_initialization():
 def test_invalid_orientation_type():
     # Arrange & Act & Assert
     with pytest.raises(TypeError):
-        MermaidDiagramBuilder(orientation="invalid")
+        DiagramBuilder(orientation="invalid")
 
 
 def test_invalid_node_shape_type():
     # Arrange & Act & Assert
     with pytest.raises(TypeError):
-        MermaidDiagramBuilder(node_shape="invalid")
+        DiagramBuilder(node_shape="invalid")
 
 
 def test_build_empty_graph():
     # Arrange
     graph = nx.Graph()
-    builder = MermaidDiagramBuilder()
+    builder = DiagramBuilder()
 
     # Act
     diagram = builder.build(graph)
@@ -73,7 +72,7 @@ def test_build_simple_graph():
     # Arrange
     graph = nx.Graph()
     graph.add_edge(1, 2)
-    builder = MermaidDiagramBuilder()
+    builder = DiagramBuilder()
 
     # Act
     diagram = builder.build(graph)
@@ -91,7 +90,7 @@ def test_build_graph_with_node_labels():
     graph.add_node(1, label="Node 1")
     graph.add_node(2, label="Node 2")
     graph.add_edge(1, 2)
-    builder = MermaidDiagramBuilder()
+    builder = DiagramBuilder()
 
     # Act
     diagram = builder.build(graph)
@@ -105,7 +104,7 @@ def test_build_graph_with_edge_labels():
     # Arrange
     graph = nx.Graph()
     graph.add_edge(1, 2, label="Edge 1-2")
-    builder = MermaidDiagramBuilder()
+    builder = DiagramBuilder()
 
     # Act
     diagram = builder.build(graph)
@@ -120,7 +119,7 @@ def test_build_graph_with_node_colors():
     graph.add_node(1, color="#FF0000")
     graph.add_node(2, color="#00FF00")
     graph.add_edge(1, 2)
-    builder = MermaidDiagramBuilder()
+    builder = DiagramBuilder()
 
     # Act
     diagram = builder.build(graph)
@@ -135,7 +134,7 @@ def test_build_graph_with_custom_node_shape():
     graph = nx.Graph()
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = MermaidDiagramBuilder(node_shape=NodeShape.RECTANGLE)
+    builder = DiagramBuilder(node_shape=DiagramNodeShape.RECTANGLE)
 
     # Act
     diagram = builder.build(graph)
@@ -149,7 +148,7 @@ def test_build_graph_with_custom_orientation():
     graph = nx.Graph()
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = MermaidDiagramBuilder(orientation=Orientation.TOP_DOWN)
+    builder = DiagramBuilder(orientation=DiagramOrientation.TOP_DOWN)
 
     # Act
     diagram = builder.build(graph)
@@ -163,7 +162,7 @@ def test_build_graph_with_custom_layout():
     graph = nx.Graph()
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = MermaidDiagramBuilder(layout='elk')
+    builder = DiagramBuilder(layout='elk')
 
     # Act
     diagram = builder.build(graph)
@@ -177,7 +176,7 @@ def test_build_graph_with_custom_look():
     graph = nx.Graph()
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = MermaidDiagramBuilder(look='neo')
+    builder = DiagramBuilder(look='neo')
 
     # Act
     diagram = builder.build(graph)
@@ -191,7 +190,7 @@ def test_build_graph_with_custom_theme():
     graph = nx.Graph()
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = MermaidDiagramBuilder(theme='neutral')
+    builder = DiagramBuilder(theme='neutral')
 
     # Act
     diagram = builder.build(graph)
@@ -205,7 +204,7 @@ def test_build_graph_with_title():
     graph = nx.Graph(name="My Graph")
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = MermaidDiagramBuilder()
+    builder = DiagramBuilder()
 
     # Act
     diagram = builder.build(graph)

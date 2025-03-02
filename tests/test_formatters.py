@@ -31,7 +31,6 @@ def test_html_without_title():
     <pre class="mermaid">
 graph LR
 A-->B
-
     </pre>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
@@ -69,7 +68,6 @@ def test_html_with_title():
     <pre class="mermaid">
 graph LR
 A-->B
-
     </pre>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
