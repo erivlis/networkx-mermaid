@@ -1,10 +1,10 @@
-from networkx_mermaid.builders import MermaidDiagramBuilder, NodeShape, Orientation
-from networkx_mermaid.formatters import markdown, html
-from networkx_mermaid.typing import MermaidDiagram
-
 from tempfile import TemporaryDirectory
 
 import networkx as nx
+
+from networkx_mermaid.builders import MermaidDiagramBuilder, NodeShape, Orientation
+from networkx_mermaid.formatters import html, markdown
+from networkx_mermaid.typing import MermaidDiagram
 
 
 def create_graph():
@@ -50,14 +50,14 @@ def main():
         import http.server
         import socketserver
 
-        PORT = 8073
+        port = 8073
 
         class Handler(http.server.SimpleHTTPRequestHandler):
             def __init__(self, *args, **kwargs):
                 super().__init__(*args, directory=temp_dir, **kwargs)
 
-        with socketserver.TCPServer(('', PORT), Handler) as httpd:
-            print("serving at port", PORT)
+        with socketserver.TCPServer(('', port), Handler) as httpd:
+            print("serving at port", port)
             httpd.serve_forever()
 
 
