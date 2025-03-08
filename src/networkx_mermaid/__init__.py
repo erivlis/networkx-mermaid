@@ -1,4 +1,4 @@
-from . import builders, formatters
+from . import builders, formatters, typing
 from .builders import DiagramBuilder
 from .models import DiagramLayout, DiagramLook, DiagramNodeShape, DiagramOrientation, DiagramTheme
 
@@ -10,5 +10,6 @@ __all__ = (
     'DiagramOrientation',
     'DiagramTheme',
     'builders',
-    'formatters'
+    'formatters',
+    'typing'
 )
