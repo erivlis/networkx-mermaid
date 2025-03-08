@@ -115,3 +115,100 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+## Diagram
+
+```mermaid
+---
+title: Platonic Tetrahedral Graph + Dodecahedral Graph
+config:
+  layout: dagre
+  look: neo
+  theme: neutral
+---
+graph LR
+AAA([0])
+style AAA fill:#FFCCCC, color:#000000
+AAE([1])
+style AAE fill:#FFCCCC, color:#000000
+AAI([2])
+style AAI fill:#FFCCCC, color:#000000
+AAM([3])
+style AAM fill:#FFCCCC, color:#000000
+AAQ([4])
+style AAQ fill:#CCFFCC, color:#000000
+AAU([5])
+style AAU fill:#CCFFCC, color:#000000
+AAY([6])
+style AAY fill:#CCFFCC, color:#000000
+AAc([7])
+style AAc fill:#CCFFCC, color:#000000
+AAg([8])
+style AAg fill:#CCFFCC, color:#000000
+AAk([9])
+style AAk fill:#CCFFCC, color:#000000
+AAo([10])
+style AAo fill:#CCFFCC, color:#000000
+AAs([11])
+style AAs fill:#CCFFCC, color:#000000
+AAw([12])
+style AAw fill:#CCFFCC, color:#000000
+AA0([13])
+style AA0 fill:#CCFFCC, color:#000000
+AA4([14])
+style AA4 fill:#CCFFCC, color:#000000
+AA8([15])
+style AA8 fill:#CCFFCC, color:#000000
+ABA([16])
+style ABA fill:#CCFFCC, color:#000000
+ABE([17])
+style ABE fill:#CCFFCC, color:#000000
+ABI([18])
+style ABI fill:#CCFFCC, color:#000000
+ABM([19])
+style ABM fill:#CCFFCC, color:#000000
+ABQ([20])
+style ABQ fill:#CCFFCC, color:#000000
+ABU([21])
+style ABU fill:#CCFFCC, color:#000000
+ABY([22])
+style ABY fill:#CCFFCC, color:#000000
+ABc([23])
+style ABc fill:#CCFFCC, color:#000000
+AAA --> AAE
+AAA --> AAI
+AAA --> AAM
+AAE --> AAI
+AAE --> AAM
+AAI --> AAM
+AAQ --> AAU
+AAQ --> ABc
+AAQ --> AA4
+AAU --> AAY
+AAU --> AAw
+AAY --> AAc
+AAY --> AAo
+AAc --> AAg
+AAc --> ABc
+AAg --> AAk
+AAg --> ABU
+AAk --> AAo
+AAk --> ABM
+AAo --> AAs
+AAs --> AAw
+AAs --> ABI
+AAw --> AA0
+AA0 --> AA4
+AA0 --> ABE
+AA4 --> AA8
+AA8 --> ABA
+AA8 --> ABY
+ABA --> ABE
+ABA --> ABQ
+ABE --> ABI
+ABI --> ABM
+ABM --> ABQ
+ABQ --> ABU
+ABU --> ABY
+ABY --> ABc
+```
