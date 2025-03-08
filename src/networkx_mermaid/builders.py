@@ -1,3 +1,5 @@
+import base64
+import struct
 from typing import Any
 
 import networkx as nx
@@ -44,6 +46,12 @@ def _node_style(node_id: str, data: dict[str, Any]) -> str:
 def _graph_title(graph: nx.Graph) -> str:
     """Generate a graph title string."""
     return f"title: {graph.name}\n" if graph.name else ""
+
+
+def _node_id(node_id) -> str:
+    """Generate a node id string."""
+    n_id = base64.b64encode(struct.pack('>h', node_id)).decode().strip('=')
+    return n_id
 
 
 class DiagramBuilder:
@@ -100,13 +108,10 @@ class DiagramBuilder:
         bra, ket = self.node_shape.value
 
         nodes = "\n".join(
-            f"{u}{bra}{v.get('label', u)}{ket}{_node_style(u, v)}"
-            for u, v in graph.nodes.data()
-        )
+            f"{_node_id(u)}{bra}{d.get('label', u)}{ket}{_node_style(_node_id(u), d)}" for u, d in graph.nodes.data())
 
-        edges = "\n".join(
-            f"{u} -->{_edge_label(d)} {v}" for u, v, d in graph.edges.data()
-        )
+        _edges = ((_node_id(u), _node_id(v), d) for u, v, d in graph.edges.data())
+        edges = "\n".join(f"{u} -->{_edge_label(d)} {v}" for u, v, d in _edges)
 
         return (
             f"{config}"
