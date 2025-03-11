@@ -50,7 +50,9 @@ def _graph_title(graph: nx.Graph) -> str:
 
 def _node_id(node_id) -> str:
     """Generate a node id string."""
-    n_id = base64.b64encode(struct.pack('>h', node_id)).decode().strip('=')
+    n_repr = repr(node_id)
+    n_b64 = base64.urlsafe_b64encode(n_repr.encode())
+    n_id = n_b64.decode().rstrip('=')
     return n_id
 
 
