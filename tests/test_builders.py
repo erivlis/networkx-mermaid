@@ -263,7 +263,7 @@ def test_contrast_color_valid_hex(color, expected_contrast):
 def test_contrast_color_invalid_hex(color):
     # Arrange (done by parametrizing)
     # Act & Assert
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError): # noqa: PT011
         _contrast_color(color)
 
 

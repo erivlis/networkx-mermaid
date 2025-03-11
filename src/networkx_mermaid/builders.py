@@ -1,5 +1,4 @@
 import base64
-import struct
 from typing import Any
 
 import networkx as nx

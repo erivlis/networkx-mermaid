@@ -4,7 +4,7 @@ from tempfile import TemporaryDirectory
 
 import networkx as nx
 
-from networkx_mermaid import DiagramOrientation, DiagramNodeShape
+from networkx_mermaid import DiagramNodeShape, DiagramOrientation
 from networkx_mermaid.builders import DiagramBuilder
 from networkx_mermaid.formatters import html, markdown
 from networkx_mermaid.typing import MermaidDiagram
