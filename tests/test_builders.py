@@ -112,6 +112,19 @@ def test_build_graph_with_edge_labels():
     # Assert
     assert "MQ -->|Edge 1-2| Mg" in diagram
 
+def test_build_graph_without_edge_labels():
+    # Arrange
+    graph = nx.Graph()
+    graph.add_edge(1, 2, label="Edge 1-2")
+    builder = DiagramBuilder()
+
+    # Act
+    diagram = builder.build(graph, with_edge_labels=False)
+
+    # Assert
+    assert "MQ --> Mg" in diagram
+    assert "|Edge 1-2|" not in diagram
+
 
 def test_build_graph_with_node_colors():
     # Arrange

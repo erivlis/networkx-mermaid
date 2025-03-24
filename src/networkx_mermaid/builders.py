@@ -89,7 +89,7 @@ class DiagramBuilder:
         if not isinstance(node_shape, DiagramNodeShape):
             raise TypeError("node_shape must be a valid NodeShape enum")
 
-    def build(self, graph: nx.Graph) -> MermaidDiagram:
+    def build(self, graph: nx.Graph, with_edge_labels: bool = True) -> MermaidDiagram:
         """
         Materialize a graph as a Mermaid flowchart.
 
@@ -112,7 +112,7 @@ class DiagramBuilder:
             f"{_node_id(u)}{bra}{d.get('label', u)}{ket}{_node_style(_node_id(u), d)}" for u, d in graph.nodes.data())
 
         _edges = ((_node_id(u), _node_id(v), d) for u, v, d in graph.edges.data())
-        edges = "\n".join(f"{u} -->{_edge_label(d)} {v}" for u, v, d in _edges)
+        edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
 
         return (
             f"{config}"
