@@ -42,9 +42,10 @@ def _node_style(node_id: str, data: dict[str, Any]) -> str:
     return ""
 
 
-def _graph_title(graph: nx.Graph) -> str:
+def _graph_title(graph: nx.Graph, title: str | None = None) -> str:
     """Generate a graph title string."""
-    return f"title: {graph.name}\n" if graph.name else ""
+    title = title if title is not None else graph.name
+    return f"title: {title}\n" if title else ""
 
 
 def _node_id(node_id) -> str:
@@ -62,6 +63,7 @@ class DiagramBuilder:
 
     def __init__(
             self,
+            title: str | None = None,
             orientation: DiagramOrientation = DiagramOrientation.LEFT_RIGHT,
             node_shape: DiagramNodeShape = DiagramNodeShape.DEFAULT,
             layout: str = DEFAULT_LAYOUT,
@@ -69,15 +71,19 @@ class DiagramBuilder:
             theme: str = DEFAULT_THEME,
     ):
         """
-        Initialize the MermaidDiagramGenerator.
+        Initialize the DiagramBuilder.
 
         Args:
+            title: The title of the graph (default: None).
+                   If None, the graph name will be used if available.
+                   Supplying and empty string will remove the title.
             orientation: The orientation of the graph (default: LEFT_RIGHT).
             node_shape: The shape of the nodes (default: DEFAULT).
             layout: the layout to use (default: 'dagre')
             look: the look to use (default: 'neo')
             theme: the theme to use (default: 'neutral')
         """
+        self.title = title
         self.orientation = orientation
         self.node_shape = node_shape
         self.layout = layout
@@ -98,7 +104,7 @@ class DiagramBuilder:
         """
         config = (
             f"---\n"
-            f"{_graph_title(graph)}"
+            f"{_graph_title(graph, self.title)}"
             f"config:\n"
             f"  layout: {self.layout}\n"
             f"  look: {self.look}\n"

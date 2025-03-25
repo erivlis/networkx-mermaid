@@ -226,6 +226,48 @@ def test_build_graph_with_title():
     assert "title: My Graph" in diagram
 
 
+def test_build_graph_without_title():
+    # Arrange
+    graph = nx.Graph()
+    graph.add_node(1)
+    graph.add_edge(1, 1)
+    builder = DiagramBuilder()
+
+    # Act
+    diagram = builder.build(graph)
+
+    # Assert
+    assert "title" not in diagram
+
+def test_build_graph_with_title_overwrite():
+    # Arrange
+    graph = nx.Graph(name="My Graph")
+    graph.add_node(1)
+    graph.add_edge(1, 1)
+    builder = DiagramBuilder(title="Custom Title")
+
+    # Act
+    diagram = builder.build(graph)
+
+    # Assert
+    assert "title: Custom Title" in diagram
+    assert "title: My Graph" not in diagram
+
+
+def test_build_graph_with_empty_title_overwrite():
+    # Arrange
+    graph = nx.Graph(name="My Graph")
+    graph.add_node(1)
+    graph.add_edge(1, 1)
+    builder = DiagramBuilder(title="")
+
+    # Act
+    diagram = builder.build(graph)
+
+    # Assert
+    assert "title" not in diagram
+
+
 def test_edge_label_with_label():
     # Arrange
     data = {"label": "Edge Label"}
