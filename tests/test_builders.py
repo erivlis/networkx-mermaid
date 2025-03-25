@@ -112,6 +112,7 @@ def test_build_graph_with_edge_labels():
     # Assert
     assert "MQ -->|Edge 1-2| Mg" in diagram
 
+
 def test_build_graph_without_edge_labels():
     # Arrange
     graph = nx.Graph()
@@ -239,15 +240,16 @@ def test_build_graph_without_title():
     # Assert
     assert "title" not in diagram
 
+
 def test_build_graph_with_title_overwrite():
     # Arrange
     graph = nx.Graph(name="My Graph")
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = DiagramBuilder(title="Custom Title")
+    builder = DiagramBuilder()
 
     # Act
-    diagram = builder.build(graph)
+    diagram = builder.build(graph, title="Custom Title")
 
     # Assert
     assert "title: Custom Title" in diagram
@@ -259,10 +261,10 @@ def test_build_graph_with_empty_title_overwrite():
     graph = nx.Graph(name="My Graph")
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = DiagramBuilder(title="")
+    builder = DiagramBuilder()
 
     # Act
-    diagram = builder.build(graph)
+    diagram = builder.build(graph, title="")
 
     # Assert
     assert "title" not in diagram
@@ -318,7 +320,7 @@ def test_contrast_color_valid_hex(color, expected_contrast):
 def test_contrast_color_invalid_hex(color):
     # Arrange (done by parametrizing)
     # Act & Assert
-    with pytest.raises(ValueError): # noqa: PT011
+    with pytest.raises(ValueError):  # noqa: PT011
         _contrast_color(color)
 
 
