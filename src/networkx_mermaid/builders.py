@@ -63,7 +63,6 @@ class DiagramBuilder:
 
     def __init__(
             self,
-            title: str | None = None,
             orientation: DiagramOrientation = DiagramOrientation.LEFT_RIGHT,
             node_shape: DiagramNodeShape = DiagramNodeShape.DEFAULT,
             layout: str = DEFAULT_LAYOUT,
@@ -74,16 +73,12 @@ class DiagramBuilder:
         Initialize the DiagramBuilder.
 
         Args:
-            title: The title of the graph (default: None).
-                   If None, the graph name will be used if available.
-                   Supplying and empty string will remove the title.
             orientation: The orientation of the graph (default: LEFT_RIGHT).
             node_shape: The shape of the nodes (default: DEFAULT).
             layout: the layout to use (default: 'dagre')
             look: the look to use (default: 'neo')
             theme: the theme to use (default: 'neutral')
         """
-        self.title = title
         self.orientation = orientation
         self.node_shape = node_shape
         self.layout = layout
@@ -95,16 +90,23 @@ class DiagramBuilder:
         if not isinstance(node_shape, DiagramNodeShape):
             raise TypeError("node_shape must be a valid NodeShape enum")
 
-    def build(self, graph: nx.Graph, with_edge_labels: bool = True) -> MermaidDiagram:
+    def build(self, graph: nx.Graph, title: str | None = None, with_edge_labels: bool = True) -> MermaidDiagram:
         """
         Materialize a graph as a Mermaid flowchart.
+
+        Args:
+            graph: The NetworkX graph to convert.
+            title: The title of the graph (default: None).
+                   If None, the graph name will be used if available.
+                   Supplying and empty string will remove the title.
+            with_edge_labels: Whether to include edge labels (default: True).
 
         Returns:
             A string representation of the graph as a Mermaid graph.
         """
         config = (
             f"---\n"
-            f"{_graph_title(graph, self.title)}"
+            f"{_graph_title(graph, title)}"
             f"config:\n"
             f"  layout: {self.layout}\n"
             f"  look: {self.look}\n"
