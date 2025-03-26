@@ -1,7 +1,9 @@
 import base64
+from collections import defaultdict
 from typing import Any
 
 import networkx as nx
+from mappingtools.operators import unique_strings
 
 from .models import DiagramNodeShape, DiagramOrientation
 from .typing import MermaidDiagram
@@ -116,10 +118,21 @@ class DiagramBuilder:
 
         bra, ket = self.node_shape.value
 
-        nodes = "\n".join(
-            f"{_node_id(u)}{bra}{d.get('label', u)}{ket}{_node_style(_node_id(u), d)}" for u, d in graph.nodes.data())
+        _us = unique_strings()
 
-        _edges = ((_node_id(u), _node_id(v), d) for u, v, d in graph.edges.data())
+        def _next_id():
+            return next(_us)
+
+        _minified_ids = defaultdict(_next_id)
+
+        def _minify_id(key):
+            return _minified_ids[key]
+
+        nodes = "\n".join(
+            f"{_minify_id(u)}{bra}{d.get('label', u)}{ket}{_node_style(_minify_id(u), d)}" for u, d in
+            graph.nodes.data())
+
+        _edges = ((_minify_id(u), _minify_id(v), d) for u, v, d in graph.edges.data())
         edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
 
         return (

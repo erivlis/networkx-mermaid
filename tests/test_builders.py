@@ -79,9 +79,9 @@ def test_build_simple_graph():
 
     # Assert
     assert "graph LR" in diagram
-    assert "MQ(1)" in diagram
-    assert "Mg(2)" in diagram
-    assert "MQ --> Mg" in diagram
+    assert "A(1)" in diagram
+    assert "B(2)" in diagram
+    assert "A --> B" in diagram
 
 
 def test_build_graph_with_node_labels():
@@ -96,8 +96,9 @@ def test_build_graph_with_node_labels():
     diagram = builder.build(graph)
 
     # Assert
-    assert "MQ(Node 1)" in diagram
-    assert "Mg(Node 2)" in diagram
+    assert "A(Node 1)" in diagram
+    assert "B(Node 2)" in diagram
+    assert "A --> B" in diagram
 
 
 def test_build_graph_with_edge_labels():
@@ -110,7 +111,7 @@ def test_build_graph_with_edge_labels():
     diagram = builder.build(graph)
 
     # Assert
-    assert "MQ -->|Edge 1-2| Mg" in diagram
+    assert "A -->|Edge 1-2| B" in diagram
 
 
 def test_build_graph_without_edge_labels():
@@ -123,7 +124,7 @@ def test_build_graph_without_edge_labels():
     diagram = builder.build(graph, with_edge_labels=False)
 
     # Assert
-    assert "MQ --> Mg" in diagram
+    assert "A --> B" in diagram
     assert "|Edge 1-2|" not in diagram
 
 
@@ -139,8 +140,8 @@ def test_build_graph_with_node_colors():
     diagram = builder.build(graph)
 
     # Assert
-    assert "style MQ fill:#FF0000, color:#ffffff" in diagram
-    assert "style Mg fill:#00FF00, color:#ffffff" in diagram
+    assert "style A fill:#FF0000, color:#ffffff" in diagram
+    assert "style B fill:#00FF00, color:#ffffff" in diagram
 
 
 def test_build_graph_with_custom_node_shape():
@@ -154,7 +155,7 @@ def test_build_graph_with_custom_node_shape():
     diagram = builder.build(graph)
 
     # Assert
-    assert "MQ[1]" in diagram
+    assert "A[1]" in diagram
 
 
 def test_build_graph_with_custom_orientation():
