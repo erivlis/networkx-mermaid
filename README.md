@@ -1,6 +1,6 @@
 # networkx-mermaid
 
-Create a Mermaid graph from a NetworkX graph
+> Create a Mermaid graph from a NetworkX graph
 
 [![codecov](https://codecov.io/gh/erivlis/networkx-mermaid/graph/badge.svg?token=lwajrOGQ8o)](https://codecov.io/gh/erivlis/networkx-mermaid)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/f0d3c12c51d2484eb8f92e9f29615def)](https://app.codacy.com/gh/erivlis/networkx-mermaid/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
@@ -15,6 +15,15 @@ Create a Mermaid graph from a NetworkX graph
 
 [![Snyk](https://snyk.io/test/github/erivlis/networkx-mermaid/badge.svg)](https://snyk.io/test/github/erivlis/networkx-mermaid)
 
+![Test](https://github.com/erivlis/networkx-mermaid/actions/workflows/test.yml/badge.svg)
+![Test](https://github.com/erivlis/networkx-mermaid/actions/workflows/test-beta.yml/badge.svg)
+![Test](https://github.com/erivlis/networkx-mermaid/actions/workflows/publish.yml/badge.svg)
+
+<a href="https://www.jetbrains.com/pycharm/"><img alt="PyCharm" src="https://img.shields.io/badge/PyCharm-FCF84A.svg?logo=PyCharm&logoColor=black&labelColor=21D789&color=FCF84A"></a>
+<a href="https://github.com/astral-sh/uv"><img alt="uv" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json" style="max-width:100%;"></a>
+<a href="https://github.com/astral-sh/ruff"><img alt="ruff" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" style="max-width:100%;"></a>
+<a href="https://hatch.pypa.io"><img alt="Hatch project" class="off-glb" loading="lazy" src="https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg"></a>
+
 ## Example
 
 ```python title="Create a Mermaid Diagram from a NetworkX Graph"
@@ -23,11 +32,7 @@ import webbrowser
 from tempfile import TemporaryDirectory
 
 import networkx as nx
-
-from networkx_mermaid import DiagramOrientation, DiagramNodeShape
-from networkx_mermaid.builders import DiagramBuilder
-from networkx_mermaid.formatters import html, markdown
-from networkx_mermaid.typing import MermaidDiagram
+import networkx_mermaid as nxm
 
 
 # An example of a graph with multiple components
@@ -48,9 +53,9 @@ def create_graph():
 def create_builder():
     # Create a Mermaid Diagram Builder with custom settings
 
-    builder = DiagramBuilder(
-        orientation=DiagramOrientation.LEFT_RIGHT,
-        node_shape=DiagramNodeShape.ROUND_RECTANGLE,
+    builder = nxm.builders.DiagramBuilder(
+        orientation=nxm.DiagramOrientation.LEFT_RIGHT,
+        node_shape=nxm.DiagramNodeShape.ROUND_RECTANGLE,
     )
     return builder
 
@@ -83,13 +88,13 @@ def main():
     builder = create_builder()
 
     # Build the Mermaid Diagram
-    mermaid_diagram: MermaidDiagram = builder.build(graph)
+    mermaid_diagram: nxm.typing.MermaidDiagram = builder.build(graph)
 
     # Format the Mermaid Diagram for Markdown embedding
-    markdown_diagram: str = markdown(mermaid_diagram)
+    markdown_diagram: str = nxm.formatters.markdown(mermaid_diagram)
 
     # or as single page HTML
-    html_diagram: str = html(mermaid_diagram, title=graph.name)
+    html_diagram: str = nxm.formatters.html(mermaid_diagram, title=graph.name)
 
     print('Mermaid Diagram:')
     print(mermaid_diagram)
@@ -116,7 +121,7 @@ if __name__ == "__main__":
     main()
 ```
 
-## Diagram
+## Example Output Diagram
 
 ```mermaid
 ---
@@ -127,88 +132,88 @@ config:
   theme: neutral
 ---
 graph LR
-AAA([0])
-style AAA fill:#FFCCCC, color:#000000
-AAE([1])
-style AAE fill:#FFCCCC, color:#000000
-AAI([2])
-style AAI fill:#FFCCCC, color:#000000
-AAM([3])
-style AAM fill:#FFCCCC, color:#000000
-AAQ([4])
-style AAQ fill:#CCFFCC, color:#000000
-AAU([5])
-style AAU fill:#CCFFCC, color:#000000
-AAY([6])
-style AAY fill:#CCFFCC, color:#000000
-AAc([7])
-style AAc fill:#CCFFCC, color:#000000
-AAg([8])
-style AAg fill:#CCFFCC, color:#000000
-AAk([9])
-style AAk fill:#CCFFCC, color:#000000
-AAo([10])
-style AAo fill:#CCFFCC, color:#000000
-AAs([11])
-style AAs fill:#CCFFCC, color:#000000
-AAw([12])
-style AAw fill:#CCFFCC, color:#000000
-AA0([13])
-style AA0 fill:#CCFFCC, color:#000000
-AA4([14])
-style AA4 fill:#CCFFCC, color:#000000
-AA8([15])
-style AA8 fill:#CCFFCC, color:#000000
-ABA([16])
-style ABA fill:#CCFFCC, color:#000000
-ABE([17])
-style ABE fill:#CCFFCC, color:#000000
-ABI([18])
-style ABI fill:#CCFFCC, color:#000000
-ABM([19])
-style ABM fill:#CCFFCC, color:#000000
-ABQ([20])
-style ABQ fill:#CCFFCC, color:#000000
-ABU([21])
-style ABU fill:#CCFFCC, color:#000000
-ABY([22])
-style ABY fill:#CCFFCC, color:#000000
-ABc([23])
-style ABc fill:#CCFFCC, color:#000000
-AAA --> AAE
-AAA --> AAI
-AAA --> AAM
-AAE --> AAI
-AAE --> AAM
-AAI --> AAM
-AAQ --> AAU
-AAQ --> ABc
-AAQ --> AA4
-AAU --> AAY
-AAU --> AAw
-AAY --> AAc
-AAY --> AAo
-AAc --> AAg
-AAc --> ABc
-AAg --> AAk
-AAg --> ABU
-AAk --> AAo
-AAk --> ABM
-AAo --> AAs
-AAs --> AAw
-AAs --> ABI
-AAw --> AA0
-AA0 --> AA4
-AA0 --> ABE
-AA4 --> AA8
-AA8 --> ABA
-AA8 --> ABY
-ABA --> ABE
-ABA --> ABQ
-ABE --> ABI
-ABI --> ABM
-ABM --> ABQ
-ABQ --> ABU
-ABU --> ABY
-ABY --> ABc
+    AAA([0])
+    style AAA fill: #FFCCCC, color: #000000
+    AAE([1])
+    style AAE fill: #FFCCCC, color: #000000
+    AAI([2])
+    style AAI fill: #FFCCCC, color: #000000
+    AAM([3])
+    style AAM fill: #FFCCCC, color: #000000
+    AAQ([4])
+    style AAQ fill: #CCFFCC, color: #000000
+    AAU([5])
+    style AAU fill: #CCFFCC, color: #000000
+    AAY([6])
+    style AAY fill: #CCFFCC, color: #000000
+    AAc([7])
+    style AAc fill: #CCFFCC, color: #000000
+    AAg([8])
+    style AAg fill: #CCFFCC, color: #000000
+    AAk([9])
+    style AAk fill: #CCFFCC, color: #000000
+    AAo([10])
+    style AAo fill: #CCFFCC, color: #000000
+    AAs([11])
+    style AAs fill: #CCFFCC, color: #000000
+    AAw([12])
+    style AAw fill: #CCFFCC, color: #000000
+    AA0([13])
+    style AA0 fill: #CCFFCC, color: #000000
+    AA4([14])
+    style AA4 fill: #CCFFCC, color: #000000
+    AA8([15])
+    style AA8 fill: #CCFFCC, color: #000000
+    ABA([16])
+    style ABA fill: #CCFFCC, color: #000000
+    ABE([17])
+    style ABE fill: #CCFFCC, color: #000000
+    ABI([18])
+    style ABI fill: #CCFFCC, color: #000000
+    ABM([19])
+    style ABM fill: #CCFFCC, color: #000000
+    ABQ([20])
+    style ABQ fill: #CCFFCC, color: #000000
+    ABU([21])
+    style ABU fill: #CCFFCC, color: #000000
+    ABY([22])
+    style ABY fill: #CCFFCC, color: #000000
+    ABc([23])
+    style ABc fill: #CCFFCC, color: #000000
+    AAA --> AAE
+    AAA --> AAI
+    AAA --> AAM
+    AAE --> AAI
+    AAE --> AAM
+    AAI --> AAM
+    AAQ --> AAU
+    AAQ --> ABc
+    AAQ --> AA4
+    AAU --> AAY
+    AAU --> AAw
+    AAY --> AAc
+    AAY --> AAo
+    AAc --> AAg
+    AAc --> ABc
+    AAg --> AAk
+    AAg --> ABU
+    AAk --> AAo
+    AAk --> ABM
+    AAo --> AAs
+    AAs --> AAw
+    AAs --> ABI
+    AAw --> AA0
+    AA0 --> AA4
+    AA0 --> ABE
+    AA4 --> AA8
+    AA8 --> ABA
+    AA8 --> ABY
+    ABA --> ABE
+    ABA --> ABQ
+    ABE --> ABI
+    ABI --> ABM
+    ABM --> ABQ
+    ABQ --> ABU
+    ABU --> ABY
+    ABY --> ABc
 ```
