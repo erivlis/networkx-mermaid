@@ -1,6 +1,6 @@
 [project]
 name = "networkx-mermaid"
-version = "0.1.6"
+version = "0.1.7"
 description = "Create a Mermaid graph from a NetworkX graph"
 authors = [
     { name = "Eran Rivlis", email = "eran@rivlis.info" },
@@ -28,6 +28,7 @@ classifiers = [
 ]
 keywords = ['Graph', 'NetworkX', 'Mermaid']
 dependencies = [
+    "mappingtools>=0.4.0",
     "networkx>=3.4.2",
 ]
 
