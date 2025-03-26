@@ -1,4 +1,3 @@
-import base64
 from collections import defaultdict
 from typing import Any
 
@@ -48,14 +47,6 @@ def _graph_title(graph: nx.Graph, title: str | None = None) -> str:
     """Generate a graph title string."""
     title = title if title is not None else graph.name
     return f"title: {title}\n" if title else ""
-
-
-def _node_id(node_id) -> str:
-    """Generate a node id string."""
-    n_repr = repr(node_id)
-    n_b64 = base64.urlsafe_b64encode(n_repr.encode())
-    n_id = n_b64.decode().rstrip('=')
-    return n_id
 
 
 class DiagramBuilder:
