@@ -1,6 +1,6 @@
 [project]
 name = "networkx-mermaid"
-version = "0.1.8"
+version = "0.2.0"
 description = "Create a Mermaid graph from a NetworkX graph"
 authors = [
     { name = "Eran Rivlis", email = "eran@rivlis.info" },
