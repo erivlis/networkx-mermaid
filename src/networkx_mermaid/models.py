@@ -1,23 +1,23 @@
-from enum import Enum
+from enum import Enum, StrEnum
 
 
-class DiagramLayout(Enum):
+class DiagramLayout(StrEnum):
     """Layout of a Mermaid diagram"""
     DAGRE = 'dagre'
     ELK = 'elk'
 
 
-class DiagramLook(Enum):
+class DiagramLook(StrEnum):
     """Look of a Mermaid diagram"""
     NEO = 'neo'
 
 
-class DiagramTheme(Enum):
+class DiagramTheme(StrEnum):
     """Theme of a Mermaid diagram"""
     NEUTRAL = 'neutral'
 
 
-class DiagramOrientation(Enum):
+class DiagramOrientation(StrEnum):
     """Orientation of a Mermaid graph"""
     TOP_DOWN = 'TD'
     BOTTOM_UP = 'BT'
