@@ -1,7 +1,7 @@
 from typing import Any
 
 import networkx as nx
-from mappingtools.collectors import MinifyingMapper
+from mappingtools.collectors import AutoMapper
 
 from .models import DiagramNodeShape, DiagramOrientation
 from .typing import MermaidDiagram
@@ -111,7 +111,7 @@ class DiagramBuilder:
 
         bra, ket = self.node_shape.value
 
-        minifier = MinifyingMapper()
+        minifier = AutoMapper()
 
         nodes = "\n".join(
             f"{minifier.get(u)}{bra}{d.get('label', u)}{ket}{_node_style(minifier.get(u), d)}" for u, d in

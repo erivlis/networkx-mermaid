@@ -1,6 +1,6 @@
 [project]
 name = "networkx-mermaid"
-version = "0.2.1"
+version = "0.3.0"
 description = "Create a Mermaid graph from a NetworkX graph"
 authors = [
     { name = "Eran Rivlis", email = "eran@rivlis.info" },
@@ -17,6 +17,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: Implementation :: CPython",
     "License :: OSI Approved :: MIT License",
@@ -28,7 +29,7 @@ classifiers = [
 ]
 keywords = ['Graph', 'NetworkX', 'Mermaid']
 dependencies = [
-    "mappingtools>=0.4.0",
+    "mappingtools>=0.6.0",
     "networkx>=3.4.2",
 ]
 
@@ -42,20 +43,9 @@ dependencies = [
 [dependency-groups]
 dev = [
     "uv",
-    "ruff",
-    "pipdeptree"
-]
-docs = [
-    "mkdocs-material",
-    "mkdocstrings-python",
-    "mkdocs-git-revision-date-localized-plugin",
-    "mkdocs-gen-files",
-    "mkdocs-glightbox",
-    "mkdocs-literate-nav",
-    "mkdocs-section-index",
+    "ruff"
 ]
 test = [
-    "faker",
     "pytest",
     "pytest-asyncio",
     "pytest-cov",

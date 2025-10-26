@@ -2,6 +2,21 @@
 
 > Create a Mermaid graph from a NetworkX graph
 
+<img alt="PyPI - Version" class="off-glb" loading="lazy" src="https://img.shields.io/pypi/v/networkx-mermaid.svg?logo=pypi&logoColor=lightblue">
+<img alt="PyPI - Status" class="off-glb" loading="lazy" src="https://img.shields.io/pypi/status/networkx-mermaid.svg?logo=pypi&logoColor=lightblue">
+<img alt="PyPI - Python Version" class="off-glb" loading="lazy" src="https://img.shields.io/pypi/pyversions/networkx-mermaid.svg?logo=python&label=Python&logoColor=lightblue">
+<img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dd/networkx-mermaid.svg?logo=pypi&logoColor=lightblue">
+<img alt="Libraries.io SourceRank" src="https://img.shields.io/librariesio/sourcerank/pypi/networkx-mermaid.svg?logo=Libraries.io&label=SourceRank">
+
+![Test](https://github.com/erivlis/networkx-mermaid/actions/workflows/test.yml/badge.svg)
+![Test  Beta](https://github.com/erivlis/networkx-mermaid/actions/workflows/test-beta.yml/badge.svg)
+![Publish](https://github.com/erivlis/networkx-mermaid/actions/workflows/publish.yml/badge.svg)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=bugs)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
+
 [![codecov](https://codecov.io/gh/erivlis/networkx-mermaid/graph/badge.svg?token=lwajrOGQ8o)](https://codecov.io/gh/erivlis/networkx-mermaid)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/f0d3c12c51d2484eb8f92e9f29615def)](https://app.codacy.com/gh/erivlis/networkx-mermaid/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2d6220d81d1a48cba762842eb88fee41)](https://app.codacy.com/gh/erivlis/networkx-mermaid?utm_source=github.com&utm_medium=referral&utm_content=erivlis/networkx-mermaid&utm_campaign=Badge_Grade)
@@ -9,16 +24,7 @@
 [![DeepSource](https://app.deepsource.com/gh/erivlis/networkx-mermaid.svg/?label=active+issues&show_trend=true&token=CA0lpqHi7MBnUi3L3AIDlEsJ)](https://app.deepsource.com/gh/erivlis/networkx-mermaid/)
 [![DeepSource](https://app.deepsource.com/gh/erivlis/networkx-mermaid.svg/?label=resolved+issues&show_trend=true&token=CA0lpqHi7MBnUi3L3AIDlEsJ)](https://app.deepsource.com/gh/erivlis/networkx-mermaid/)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=bugs)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=erivlis_networkx-mermaid&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=erivlis_networkx-mermaid)
-
 [![Snyk](https://snyk.io/test/github/erivlis/networkx-mermaid/badge.svg)](https://snyk.io/test/github/erivlis/networkx-mermaid)
-
-![Test](https://github.com/erivlis/networkx-mermaid/actions/workflows/test.yml/badge.svg)
-![Test](https://github.com/erivlis/networkx-mermaid/actions/workflows/test-beta.yml/badge.svg)
-![Test](https://github.com/erivlis/networkx-mermaid/actions/workflows/publish.yml/badge.svg)
 
 <a href="https://www.jetbrains.com/pycharm/"><img alt="PyCharm" src="https://img.shields.io/badge/PyCharm-FCF84A.svg?logo=PyCharm&logoColor=black&labelColor=21D789&color=FCF84A"></a>
 <a href="https://github.com/astral-sh/uv"><img alt="uv" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json" style="max-width:100%;"></a>
