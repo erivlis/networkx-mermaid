@@ -1,0 +1,85 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo for networkx-mermaid: A dolphin fin constructed from a network, emerging from dynamic, layered, blocky waves with varied colors and waviness.">
+  <title>networkx-mermaid Logo</title>
+  <style>
+    .edges { stroke: #4051b5; stroke-width: 2; stroke-linecap: round; }
+    .nodes { fill: #757ce8; }
+    /* Refined wave color palette */
+    .sea-darkest { fill: #1976D2; } /* Dark Blue */
+    .sea-dark { fill: #2196F3; } /* Medium Dark Blue */
+    .sea-medium { fill: #42A5F5; } /* Medium Blue */
+    .sea-light { fill: #64B5F6; } /* Light Blue */
+    .sea-lightest { fill: #90CAF9; } /* Very Light Blue */
+  </style>
+
+  <defs>
+    <filter id="edge-outline" x="-50%" y="-50%" width="200%" height="200%">
+      <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="0.5"/>
+      <feFlood flood-color="#455A64" flood-opacity="1" result="OUTLINE_COLOR"/>
+      <feComposite in="OUTLINE_COLOR" in2="DILATED" operator="in" result="OUTLINE"/>
+      <feMerge>
+        <feMergeNode in="OUTLINE"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="material-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+      <feOffset in="blur" dx="1" dy="1" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.3" result="offsetColor"/>
+      <feComposite in="offsetColor" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g id="sea-layers-behind">
+    <!-- Top-most breaking wave, lightest blue, more transparent -->
+    <path d="M 0 100 L 0 65 C 15 60, 40 57, 55 60 S 75 65, 100 60 L 100 100 Z" class="sea-lightest" fill-opacity="0.9" filter="url(#material-shadow)"/>
+    <!-- Layer in front of fin, lighter blue, slightly transparent -->
+    <path d="M 0 100 L 0 75 C 20 70, 45 65, 60 70 S 80 75, 100 70 L 100 100 Z" class="sea-light" fill-opacity="0.9" filter="url(#material-shadow)"/>
+    <!-- Layer just behind the fin, lighter blue, more out of phase (moved from behind) -->
+    <path d="M 0 100 L 0 85 Q 40 80, 70 85 T 100 85 L 100 100 Z" class="sea-medium" fill-opacity="0.9" filter="url(#material-shadow)"/>
+    <!-- Mid-depth layer, slightly lighter, slightly out of phase -->
+    <path d="M 0 100 L 0 90 Q 30 85, 60 90 T 100 90 L 100 100 Z" class="sea-dark"  fill-opacity="0.9" filter="url(#material-shadow)"/>
+    <!-- Deepest layer, darkest blue -->
+    <path d="M 0 100 L 0 95 Q 20 90, 50 95 T 100 95 L 100 100 Z" class="sea-darkest"  fill-opacity="0.9" filter="url(#material-shadow)"/>
+  </g>
+
+  <!-- Fin Network (between the two water layers) -->
+  <g id="fin-network">
+    <!-- Edges -->
+    <g id="fin-edges" filter="url(#edge-outline) url(#material-shadow)">
+      <!-- Outer Shape -->
+      <line x1="25" y1="75" x2="33" y2="55" class="edges"/> <!-- N1-N2 -->
+      <line x1="33" y1="55" x2="43" y2="38" class="edges"/> <!-- N2-N3 -->
+      <line x1="43" y1="38" x2="55" y2="25" class="edges"/> <!-- N3-N4 -->
+      <line x1="55" y1="25" x2="70" y2="20" class="edges"/> <!-- N4-N5 -->
+      <!-- Edge N5-N7 (was N5-N6) removed as per instruction -->
+      <line x1="70" y1="60" x2="80" y2="75" class="edges"/> <!-- N7-N8 -->
+      <line x1="80" y1="75" x2="25" y2="75" class="edges"/> <!-- N8-N1 -->
+
+      <!-- Internal Connections -->
+      <line x1="25" y1="75" x2="50" y2="60" class="edges"/> <!-- N1-N9 -->
+      <line x1="33" y1="55" x2="50" y2="60" class="edges"/> <!-- N2-N9 -->
+      <line x1="43" y1="38" x2="50" y2="60" class="edges"/> <!-- N3-N9 -->
+      <line x1="43" y1="38" x2="68" y2="45" class="edges"/> <!-- N3-N6 -->
+      <line x1="55" y1="25" x2="68" y2="45" class="edges"/> <!-- N4-N6 -->
+      <line x1="70" y1="20" x2="68" y2="45" class="edges"/> <!-- N5-N6 -->
+      <line x1="70" y1="60" x2="68" y2="45" class="edges"/> <!-- N7-N6 -->
+      <line x1="80" y1="75" x2="50" y2="60" class="edges"/> <!-- N8-N9 -->
+      <line x1="68" y1="45" x2="50" y2="60" class="edges"/> <!-- N6-N9 -->
+      <line x1="70" y1="60" x2="50" y2="60" class="edges"/> <!-- N7-N9 -->
+    </g>
+    
+    <!-- Nodes -->
+    <circle cx="25" cy="75" r="4" class="nodes" filter="url(#edge-outline) url(#material-shadow)"/> <!-- N1 -->
+    <circle cx="33" cy="55" r="4" class="nodes" filter="url(#edge-outline) url(#material-shadow)"/> <!-- N2 -->
+    <circle cx="43" cy="38" r="4" class="nodes" filter="url(#edge-outline) url(#material-shadow)"/> <!-- N3 -->
+    <circle cx="55" cy="25" r="4" class="nodes" filter="url(#edge-outline) url(#material-shadow)"/> <!-- N4 -->
+    <circle cx="70" cy="20" r="4" class="nodes" filter="url(#edge-outline) url(#material-shadow)"/> <!-- N5 (Tip) -->
+    <circle cx="68" cy="45" r="4" class="nodes" filter="url(#edge-outline) url(#material-shadow)"/> <!-- N6 -->
+    <circle cx="70" cy="60" r="4" class="nodes" filter="url(#edge-outline) url(#material-shadow)"/> <!-- N7 -->
+    <circle cx="80" cy="75" r="4" class="nodes" filter="url(#edge-outline) url(#material-shadow)"/> <!-- N8 -->
+    <circle cx="50" cy="60" r="4" class="nodes" filter="url(#edge-outline) url(#material-shadow)"/> <!-- N9 -->
+  </g>
+</svg>

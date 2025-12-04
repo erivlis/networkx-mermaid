@@ -1,0 +1,65 @@
+[project]
+site_name = "networkx-mermaid"
+repo_url = "https://github.com/erivlis/networkx-mermaid"
+repo_name = "erivlis/networkx-mermaid"
+#license = "https://github.com/erivlis/networkx-mermaid/LICENSE"
+extra_css = [
+    "stylesheets/extra.css"
+]
+nav = [
+    "index.md",
+    { Installation = "installation.md" },
+    { Usage = "usage.md" },
+    { Development = [
+        { Guide = "development.md" },
+        "contributing.md"
+    ] },
+    { Acknowkledgments = "acknowledgements.md" }
+]
+
+
+[project.theme]
+font.text = "Inter"
+font.code = "JetBrains Mono"
+logo = "images/logo.svg"
+favicon = "images/logo.svg"
+features = [
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.instant.progress",
+    "navigation.path",
+    "navigation.sections",
+    #    "navigation.tabs",
+    "navigation.top",
+    "navigation.tracking",
+    "toc.follow",
+]
+
+# Palette toggle for automatic mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+# Palette toggle for light mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+# Palette toggle for dark mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+[project.plugins.mkdocstrings.handlers.python]
+inventories = ["https://docs.python.org/3/objects.inv"]
+paths = ["src"]
+
+[project.plugins.mkdocstrings.handlers.python.options]
+docstring_style = "google"
+inherited_members = true
+show_source = false

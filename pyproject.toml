@@ -45,6 +45,10 @@ dev = [
     "uv",
     "ruff"
 ]
+docs = [
+    "zensical",
+    "mkdocstrings-python"
+]
 test = [
     "pytest",
     "pytest-asyncio",
