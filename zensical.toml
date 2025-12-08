@@ -17,7 +17,8 @@ nav = [
     ] },
     { Development = [
         { Guide = "development.md" },
-        "contributing.md"
+        "contributing.md",
+        { Dependencies = "dependencies.md" }
     ] },
     { Acknowkledgments = "acknowledgements.md" }
 ]
