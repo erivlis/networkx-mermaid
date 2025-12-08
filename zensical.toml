@@ -1,5 +1,8 @@
 [project]
+copyright = "Copyright &copy; 2025 Eran Rivlis"
 site_name = "networkx-mermaid"
+site_author = "Eran Rivlis"
+site_description = ""
 repo_url = "https://github.com/erivlis/networkx-mermaid"
 repo_name = "erivlis/networkx-mermaid"
 #license = "https://github.com/erivlis/networkx-mermaid/LICENSE"
@@ -19,11 +22,14 @@ nav = [
 
 
 [project.theme]
+variant = "classic"
 font.text = "Inter"
 font.code = "JetBrains Mono"
+language = "en"
 logo = "images/logo.svg"
 favicon = "images/logo.svg"
 features = [
+    "navigation.footer",
     "navigation.instant",
     "navigation.instant.prefetch",
     "navigation.instant.progress",
@@ -34,6 +40,14 @@ features = [
     "navigation.tracking",
     "toc.follow",
 ]
+
+
+[[project.extra.social]]
+icon = "fontawesome/brands/x-twitter"
+link = "https://x.com/erivlis"
+[[project.extra.social]]
+icon = "fontawesome/solid/envelope"
+link = "mailto:eran@rivlis.info"
 
 # Palette toggle for automatic mode
 [[project.theme.palette]]
