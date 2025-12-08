@@ -1,6 +1,4 @@
-<div align="center">
-  <img src="images/logo.svg" alt="networkx-mermaid logo" width="200">
-</div>
+![logo.svg](images/logo.svg){ width="180" align=right }
 
 # Introduction
 
