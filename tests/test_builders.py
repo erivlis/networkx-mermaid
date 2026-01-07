@@ -8,7 +8,6 @@ from networkx_mermaid.builders import (
     DEFAULT_THEME,
     DiagramBuilder,
     _contrast_color,
-    _edge_label,
     _graph_title,
     _node_style,
 )
@@ -271,26 +270,6 @@ def test_build_graph_with_empty_title_overwrite():
     assert "title" not in diagram
 
 
-def test_edge_label_with_label():
-    # Arrange
-    data = {"label": "Edge Label"}
-
-    # Act
-    result = _edge_label(data)
-
-    # Assert
-    assert result == "|Edge Label|"
-
-
-def test_edge_label_without_label():
-    # Arrange
-    data = {}
-
-    # Act
-    result = _edge_label(data)
-
-    # Assert
-    assert result == ""
 
 
 @pytest.mark.parametrize(

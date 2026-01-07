@@ -1,4 +1,5 @@
 from typing import Any
+import functools
 
 import networkx as nx
 from mappingtools.collectors import AutoMapper
@@ -11,12 +12,7 @@ DEFAULT_LOOK = "neo"
 DEFAULT_THEME = "neutral"
 
 
-def _edge_label(data: dict[str, Any]) -> str:
-    """Generate an edge label string."""
-    label = data.get("label")
-    return f"|{label}|" if label else ""
-
-
+@functools.lru_cache(maxsize=1024)
 def _contrast_color(color: str) -> str:
     """
     Return black or white by choosing the best contrast to input color.
@@ -113,12 +109,34 @@ class DiagramBuilder:
 
         minifier = AutoMapper()
 
-        nodes = "\n".join(
-            f"{minifier.get(u)}{bra}{d.get('label', u)}{ket}{_node_style(minifier.get(u), d)}" for u, d in
-            graph.nodes.data())
+        # Optimization 1: Store mapper function to local variable to avoid lookup overhead
+        # (Though in Python this is minor, minifier.get is an instance method)
+        get_id = minifier.get
 
-        _edges = ((minifier.get(u), minifier.get(v), d) for u, v, d in graph.edges.data())
-        edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
+        # Optimization 2: Unwrap the loop to avoid calling minifier.get twice per node
+        nodes_list = []
+        for u, d in graph.nodes.data():
+            # Call get_id once
+            uid = get_id(u)
+            # Use list append which is slightly faster than generator for known size but generator is fine
+            # We construct the string directly
+            nodes_list.append(f"{uid}{bra}{d.get('label', u)}{ket}{_node_style(uid, d)}")
+
+        nodes = "\n".join(nodes_list)
+
+        # Optimization 3: Combined generator expression for edges
+        # Optimization 4: Inline _edge_label check logic to avoid function call if possible or just cleaner loop
+
+        if with_edge_labels:
+            edges = "\n".join(
+                f"{get_id(u)} -->{f'|{label}|' if (label := d.get('label')) else ''} {get_id(v)}"
+                for u, v, d in graph.edges.data()
+            )
+        else:
+             edges = "\n".join(
+                f"{get_id(u)} --> {get_id(v)}"
+                for u, v, d in graph.edges.data()
+            )
 
         return (
             f"{config}"
