@@ -1,0 +1,3 @@
+## 2024-05-23 - AutoMapper vs Dict Performance
+**Learning:** Replacing repeated method calls (even fast ones like `AutoMapper.get`) with dictionary lookups can yield measurable performance gains in hot loops, especially when combined with avoiding redundant iterations (single pass). However, the overhead of creating the dictionary must be offset by enough repeated lookups (like in the edges loop) to be worth it.
+**Action:** Always measure the combined cost of data structure creation vs. method call overhead. For graph algorithms where O(E) >> O(V), caching V lookups for E uses is usually a win.

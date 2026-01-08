@@ -1,3 +1,4 @@
+from functools import lru_cache
 from typing import Any
 
 import networkx as nx
@@ -17,6 +18,7 @@ def _edge_label(data: dict[str, Any]) -> str:
     return f"|{label}|" if label else ""
 
 
+@lru_cache(maxsize=256)
 def _contrast_color(color: str) -> str:
     """
     Return black or white by choosing the best contrast to input color.
@@ -113,11 +115,17 @@ class DiagramBuilder:
 
         minifier = AutoMapper()
 
-        nodes = "\n".join(
-            f"{minifier.get(u)}{bra}{d.get('label', u)}{ket}{_node_style(minifier.get(u), d)}" for u, d in
-            graph.nodes.data())
+        # Optimize: Single pass to generate node strings and cache IDs
+        node_ids = {}
+        node_lines = []
+        for u, d in graph.nodes.data():
+            uid = minifier.get(u)
+            node_ids[u] = uid
+            node_lines.append(f"{uid}{bra}{d.get('label', u)}{ket}{_node_style(uid, d)}")
 
-        _edges = ((minifier.get(u), minifier.get(v), d) for u, v, d in graph.edges.data())
+        nodes = "\n".join(node_lines)
+
+        _edges = ((node_ids[u], node_ids[v], d) for u, v, d in graph.edges.data())
         edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
 
         return (
