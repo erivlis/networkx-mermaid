@@ -113,11 +113,14 @@ class DiagramBuilder:
 
         minifier = AutoMapper()
 
+        # Pre-calculate node IDs to avoid repeated function calls
+        node_map = {u: minifier.get(u) for u in graph.nodes()}
+
         nodes = "\n".join(
-            f"{minifier.get(u)}{bra}{d.get('label', u)}{ket}{_node_style(minifier.get(u), d)}" for u, d in
+            f"{node_map[u]}{bra}{d.get('label', u)}{ket}{_node_style(node_map[u], d)}" for u, d in
             graph.nodes.data())
 
-        _edges = ((minifier.get(u), minifier.get(v), d) for u, v, d in graph.edges.data())
+        _edges = ((node_map[u], node_map[v], d) for u, v, d in graph.edges.data())
         edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
 
         return (
