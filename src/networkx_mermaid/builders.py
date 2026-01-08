@@ -1,3 +1,4 @@
+from functools import lru_cache
 from typing import Any
 
 import networkx as nx
@@ -17,6 +18,7 @@ def _edge_label(data: dict[str, Any]) -> str:
     return f"|{label}|" if label else ""
 
 
+@lru_cache(maxsize=1024)
 def _contrast_color(color: str) -> str:
     """
     Return black or white by choosing the best contrast to input color.
