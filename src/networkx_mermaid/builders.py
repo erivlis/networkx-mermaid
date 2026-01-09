@@ -32,8 +32,13 @@ def _contrast_color(color: str) -> str:
     if not (isinstance(color, str) and color.startswith("#") and len(color) == 7):
         raise ValueError(f"Invalid color format: {color}. Expected a 6-digit hex code.")
 
-    r, g, b = int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)
-    return "#000000" if (r * 0.299 + g * 0.587 + b * 0.114) > 186 else "#ffffff"
+    # Parse the whole hex string as one integer (faster than slicing and 3 calls)
+    rgb = int(color[1:], 16)
+    r = (rgb >> 16) & 0xFF
+    g = (rgb >> 8) & 0xFF
+    b = rgb & 0xFF
+    # Use integer arithmetic for contrast calculation (approx. 186 * 1000 = 186000)
+    return "#000000" if (r * 299 + g * 587 + b * 114) > 186000 else "#ffffff"
 
 
 def _node_style(node_id: str, data: dict[str, Any]) -> str:
