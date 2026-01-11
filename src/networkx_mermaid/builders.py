@@ -12,12 +12,6 @@ DEFAULT_LOOK = "neo"
 DEFAULT_THEME = "neutral"
 
 
-def _edge_label(data: dict[str, Any]) -> str:
-    """Generate an edge label string."""
-    label = data.get("label")
-    return f"|{label}|" if label else ""
-
-
 @lru_cache(maxsize=1024)
 def _contrast_color(color: str) -> str:
     """
@@ -41,14 +35,6 @@ def _contrast_color(color: str) -> str:
     # Using scaled integer arithmetic (x1000) instead of floating point math
     # Threshold: 186 * 1000 = 186000
     return "#000000" if (r * 299 + g * 587 + b * 114) > 186000 else "#ffffff"
-
-
-def _node_style(node_id: str, data: dict[str, Any]) -> str:
-    """Generate a node style string."""
-    color = data.get("color")
-    if color:
-        return f"\nstyle {node_id} fill:{color}, color:{_contrast_color(color)}"
-    return ""
 
 
 def _graph_title(graph: nx.Graph, title: str | None = None) -> str:
@@ -125,12 +111,39 @@ class DiagramBuilder:
         # Pre-calculate node IDs to avoid repeated function calls
         node_map = {u: minifier.get(u) for u in graph.nodes()}
 
-        nodes = "\n".join(
-            f"{node_map[u]}{bra}{d.get('label', u)}{ket}{_node_style(node_map[u], d)}" for u, d in
-            graph.nodes.data())
+        # Build node strings
+        node_strings = []
+        for u, d in graph.nodes.data():
+            nid = node_map[u]
+            label = d.get('label', u)
+            color = d.get("color")
 
-        _edges = ((node_map[u], node_map[v], d) for u, v, d in graph.edges.data())
-        edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
+            if color:
+                node_strings.append(
+                    f"{nid}{bra}{label}{ket}\nstyle {nid} fill:{color}, color:{_contrast_color(color)}"
+                )
+            else:
+                node_strings.append(f"{nid}{bra}{label}{ket}")
+
+        nodes = "\n".join(node_strings)
+
+        # Build edge strings
+        if with_edge_labels:
+            edge_strings = []
+            for u, v, d in graph.edges.data():
+                u_id = node_map[u]
+                v_id = node_map[v]
+                label = d.get("label")
+                if label:
+                    edge_strings.append(f"{u_id} -->|{label}| {v_id}")
+                else:
+                    edge_strings.append(f"{u_id} --> {v_id}")
+            edges = "\n".join(edge_strings)
+        else:
+            edges = "\n".join(
+                f"{node_map[u]} --> {node_map[v]}"
+                for u, v, _ in graph.edges.data()
+            )
 
         return (
             f"{config}"
