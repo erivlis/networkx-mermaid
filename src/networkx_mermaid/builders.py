@@ -121,16 +121,39 @@ class DiagramBuilder:
         bra, ket = self.node_shape.value
 
         minifier = AutoMapper()
+        node_map = {}
+        nodes_list = []
 
-        # Pre-calculate node IDs to avoid repeated function calls
-        node_map = {u: minifier.get(u) for u in graph.nodes()}
+        # Merge node mapping and node string generation into a single pass
+        for u, d in graph.nodes.data():
+            u_mapped = minifier.get(u)
+            node_map[u] = u_mapped
 
-        nodes = "\n".join(
-            f"{node_map[u]}{bra}{d.get('label', u)}{ket}{_node_style(node_map[u], d)}" for u, d in
-            graph.nodes.data())
+            label = d.get('label', u)
+            color = d.get("color")
+            if color:
+                style = f"\nstyle {u_mapped} fill:{color}, color:{_contrast_color(color)}"
+                nodes_list.append(f"{u_mapped}{bra}{label}{ket}{style}")
+            else:
+                nodes_list.append(f"{u_mapped}{bra}{label}{ket}")
 
-        _edges = ((node_map[u], node_map[v], d) for u, v, d in graph.edges.data())
-        edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
+        nodes = "\n".join(nodes_list)
+
+        edges_list = []
+        for u, v, d in graph.edges.data():
+            u_mapped = node_map[u]
+            v_mapped = node_map[v]
+
+            if with_edge_labels:
+                label = d.get("label")
+                if label:
+                    edges_list.append(f"{u_mapped} -->|{label}| {v_mapped}")
+                else:
+                    edges_list.append(f"{u_mapped} --> {v_mapped}")
+            else:
+                edges_list.append(f"{u_mapped} --> {v_mapped}")
+
+        edges = "\n".join(edges_list)
 
         return (
             f"{config}"
