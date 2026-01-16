@@ -121,11 +121,13 @@ class DiagramBuilder:
         bra, ket = self.node_shape.value
 
         minifier = AutoMapper()
+        # Hoist the get method to a local variable to avoid repeated attribute lookups in the loop
+        minifier_get = minifier.get
 
         node_map = {}
         nodes_list = []
         for u, d in graph.nodes.data():
-            mapped_u = minifier.get(u)
+            mapped_u = minifier_get(u)
             node_map[u] = mapped_u
             nodes_list.append(f"{mapped_u}{bra}{d.get('label', u)}{ket}{_node_style(mapped_u, d)}")
 
