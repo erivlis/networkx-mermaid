@@ -126,15 +126,21 @@ class DiagramBuilder:
 
         node_map = {}
         nodes_list = []
+        append_node = nodes_list.append
+        # Hoist _node_style to a local variable
+        get_node_style = _node_style
+
         for u, d in graph.nodes.data():
             mapped_u = minifier_get(u)
             node_map[u] = mapped_u
-            nodes_list.append(f"{mapped_u}{bra}{d.get('label', u)}{ket}{_node_style(mapped_u, d)}")
+            append_node(f"{mapped_u}{bra}{d.get('label', u)}{ket}{get_node_style(mapped_u, d)}")
 
         nodes = "\n".join(nodes_list)
 
+        # Hoist _edge_label to a local variable
+        get_edge_label = _edge_label
         _edges = ((node_map[u], node_map[v], d) for u, v, d in graph.edges.data())
-        edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
+        edges = "\n".join(f"{u} -->{get_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
 
         return (
             f"{config}"
