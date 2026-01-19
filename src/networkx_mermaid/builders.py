@@ -124,17 +124,31 @@ class DiagramBuilder:
         # Hoist the get method to a local variable to avoid repeated attribute lookups in the loop
         minifier_get = minifier.get
 
+        # Hoist other repeated lookups
+        node_style_func = _node_style
+        edge_label_func = _edge_label
+
         node_map = {}
         nodes_list = []
+        nodes_list_append = nodes_list.append
+
         for u, d in graph.nodes.data():
             mapped_u = minifier_get(u)
             node_map[u] = mapped_u
-            nodes_list.append(f"{mapped_u}{bra}{d.get('label', u)}{ket}{_node_style(mapped_u, d)}")
+            nodes_list_append(f"{mapped_u}{bra}{d.get('label', u)}{ket}{node_style_func(mapped_u, d)}")
 
         nodes = "\n".join(nodes_list)
 
-        _edges = ((node_map[u], node_map[v], d) for u, v, d in graph.edges.data())
-        edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
+        if with_edge_labels:
+            edges = "\n".join(
+                f"{node_map[u]} -->{edge_label_func(d)} {node_map[v]}"
+                for u, v, d in graph.edges.data()
+            )
+        else:
+            edges = "\n".join(
+                f"{node_map[u]} --> {node_map[v]}"
+                for u, v, _ in graph.edges.data()
+            )
 
         return (
             f"{config}"
