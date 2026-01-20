@@ -121,20 +121,32 @@ class DiagramBuilder:
         bra, ket = self.node_shape.value
 
         minifier = AutoMapper()
-        # Hoist the get method to a local variable to avoid repeated attribute lookups in the loop
+        # Optimization: Hoist method lookups to local variables to avoid repeated attribute access in loops.
+        # This significantly improves performance for large graphs.
         minifier_get = minifier.get
 
         node_map = {}
         nodes_list = []
+        nodes_list_append = nodes_list.append
+        node_style_func = _node_style
+
         for u, d in graph.nodes.data():
             mapped_u = minifier_get(u)
             node_map[u] = mapped_u
-            nodes_list.append(f"{mapped_u}{bra}{d.get('label', u)}{ket}{_node_style(mapped_u, d)}")
+            nodes_list_append(f"{mapped_u}{bra}{d.get('label', u)}{ket}{node_style_func(mapped_u, d)}")
 
         nodes = "\n".join(nodes_list)
 
-        _edges = ((node_map[u], node_map[v], d) for u, v, d in graph.edges.data())
-        edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
+        edge_strings = []
+        edge_strings_append = edge_strings.append
+        edge_label_func = _edge_label
+
+        # Optimization: Flatten the loop and use list.append instead of generator expressions
+        # to avoid intermediate tuple packing/unpacking and improve speed.
+        for u, v, d in graph.edges.data():
+             edge_strings_append(f"{node_map[u]} -->{edge_label_func(d) if with_edge_labels else ''} {node_map[v]}")
+
+        edges = "\n".join(edge_strings)
 
         return (
             f"{config}"
