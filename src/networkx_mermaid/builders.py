@@ -102,7 +102,12 @@ class DiagramBuilder:
             f"---\n"
         )
 
-    def build(self, graph: nx.Graph, title: str | None = None, with_edge_labels: bool = True) -> MermaidDiagram:  # type: ignore[type-var, misc]
+    def build(  # type: ignore[type-var, misc]
+        self,
+        graph: nx.Graph,
+        title: str | None = None,
+        with_edge_labels: bool = True
+    ) -> MermaidDiagram:
         """
         Materialize a graph as a Mermaid flowchart.
 
