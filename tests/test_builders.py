@@ -33,7 +33,7 @@ def test_custom_initialization():
         node_shape=DiagramNodeShape.RECTANGLE,
         layout="elk",
         look="neo",
-        theme="neutral"
+        theme="neutral",
     )
 
     # Act & Assert
@@ -177,7 +177,7 @@ def test_build_graph_with_custom_layout():
     graph = nx.Graph()
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = DiagramBuilder(layout='elk')
+    builder = DiagramBuilder(layout="elk")
 
     # Act
     diagram = builder.build(graph)
@@ -191,7 +191,7 @@ def test_build_graph_with_custom_look():
     graph = nx.Graph()
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = DiagramBuilder(look='neo')
+    builder = DiagramBuilder(look="neo")
 
     # Act
     diagram = builder.build(graph)
@@ -205,7 +205,7 @@ def test_build_graph_with_custom_theme():
     graph = nx.Graph()
     graph.add_node(1)
     graph.add_edge(1, 1)
-    builder = DiagramBuilder(theme='neutral')
+    builder = DiagramBuilder(theme="neutral")
 
     # Act
     diagram = builder.build(graph)
@@ -294,7 +294,7 @@ def test_edge_label_without_label():
 
 
 @pytest.mark.parametrize(
-    ('color', 'expected_contrast'),
+    ("color", "expected_contrast"),
     [
         ("#FFFFFF", "#000000"),
         ("#000000", "#ffffff"),

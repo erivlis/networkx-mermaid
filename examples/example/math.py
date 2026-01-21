@@ -46,7 +46,7 @@ def create_server(port: int, root_directory: str, open_browser: bool = True) -> 
             super().__init__(*args, directory=root_directory, **kwargs)
 
     def serve():
-        with socketserver.TCPServer(('', port), Handler) as httpd:
+        with socketserver.TCPServer(("", port), Handler) as httpd:
             print("Serving at:", url)
             httpd.serve_forever()
 
@@ -71,14 +71,14 @@ def main():
     # or as single page HTML
     html_diagram: str = html(mermaid_diagram, title=graph.name)
 
-    print('Mermaid Diagram:')
+    print("Mermaid Diagram:")
     print(mermaid_diagram)
     print(markdown_diagram)
     print(html_diagram)
 
     # Save the HTML diagram to a file and serve it
     with TemporaryDirectory() as temp_dir:
-        with open(f"{temp_dir}/index.html", 'w') as f:
+        with open(f"{temp_dir}/index.html", "w") as f:
             f.write(html_diagram)
 
         # Serve the HTML diagram

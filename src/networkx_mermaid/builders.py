@@ -63,12 +63,12 @@ class DiagramBuilder:
     """
 
     def __init__(
-            self,
-            orientation: DiagramOrientation = DiagramOrientation.LEFT_RIGHT,
-            node_shape: DiagramNodeShape = DiagramNodeShape.DEFAULT,
-            layout: str = DEFAULT_LAYOUT,
-            look: str = DEFAULT_LOOK,
-            theme: str = DEFAULT_THEME,
+        self,
+        orientation: DiagramOrientation = DiagramOrientation.LEFT_RIGHT,
+        node_shape: DiagramNodeShape = DiagramNodeShape.DEFAULT,
+        layout: str = DEFAULT_LAYOUT,
+        look: str = DEFAULT_LOOK,
+        theme: str = DEFAULT_THEME,
     ):
         """
         Initialize the DiagramBuilder.
@@ -126,7 +126,7 @@ class DiagramBuilder:
         _node_style_local = _node_style
 
         node_map = {}
-        nodes_list = []
+        nodes_list: list[str] = []
         nodes_list_append = nodes_list.append
         for u, d in graph.nodes.data():
             mapped_u = minifier_get(u)
@@ -141,9 +141,4 @@ class DiagramBuilder:
             for u, v, d in graph.edges.data()
         )
 
-        return (
-            f"{config}"
-            f"graph {self.orientation.value}\n"
-            f"{nodes}\n"
-            f"{edges}"
-        )
+        return f"{config}graph {self.orientation.value}\n{nodes}\n{edges}"

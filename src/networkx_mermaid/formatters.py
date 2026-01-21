@@ -36,11 +36,7 @@ def html(diagram: MermaidDiagram, title: str | None = None) -> str:
     """
     Generate HTML code for a Mermaid diagram.
     """
-    output = HTML_TEMPLATE.replace(
-        '<pre class="mermaid">', f'<pre class="mermaid">\n{diagram}'
-    )
+    output = HTML_TEMPLATE.replace('<pre class="mermaid">', f'<pre class="mermaid">\n{diagram}')
     if title:
-        output = output.replace(
-            "<title>Mermaid Diagram</title>", f"<title>{title}</title>"
-        )
+        output = output.replace("<title>Mermaid Diagram</title>", f"<title>{title}</title>")
     return output

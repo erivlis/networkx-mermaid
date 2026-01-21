@@ -1,3 +1,3 @@
 from typing import TypeVar
 
-MermaidDiagram = TypeVar('MermaidDiagram', bound='str')
+MermaidDiagram = TypeVar("MermaidDiagram", bound="str")
