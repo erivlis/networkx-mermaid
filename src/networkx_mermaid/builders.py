@@ -123,18 +123,23 @@ class DiagramBuilder:
         minifier = AutoMapper()
         # Hoist the get method to a local variable to avoid repeated attribute lookups in the loop
         minifier_get = minifier.get
+        _node_style_local = _node_style
 
         node_map = {}
         nodes_list = []
+        nodes_list_append = nodes_list.append
         for u, d in graph.nodes.data():
             mapped_u = minifier_get(u)
             node_map[u] = mapped_u
-            nodes_list.append(f"{mapped_u}{bra}{d.get('label', u)}{ket}{_node_style(mapped_u, d)}")
+            nodes_list_append(f"{mapped_u}{bra}{d.get('label', u)}{ket}{_node_style_local(mapped_u, d)}")
 
         nodes = "\n".join(nodes_list)
 
-        _edges = ((node_map[u], node_map[v], d) for u, v, d in graph.edges.data())
-        edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
+        _edge_label_local = _edge_label
+        edges = "\n".join(
+            f"{node_map[u]} -->{_edge_label_local(d) if with_edge_labels else ''} {node_map[v]}"
+            for u, v, d in graph.edges.data()
+        )
 
         return (
             f"{config}"
