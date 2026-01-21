@@ -146,4 +146,4 @@ class DiagramBuilder:
             for u, v, d in graph.edges.data()
         )
 
-        return MermaidDiagram(f"{config}graph {self.orientation.value}\n{nodes}\n{edges}")
+        return f"{config}graph {self.orientation.value}\n{nodes}\n{edges}"
