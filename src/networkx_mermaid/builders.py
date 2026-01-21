@@ -107,7 +107,7 @@ class DiagramBuilder:
         graph: nx.Graph,
         title: str | None = None,
         with_edge_labels: bool = True,
-    ) -> MermaidDiagram:  # type: ignore[type-var, misc]
+    ) -> MermaidDiagram:  # type: ignore
         """
         Materialize a graph as a Mermaid flowchart.
 
@@ -146,4 +146,4 @@ class DiagramBuilder:
             for u, v, d in graph.edges.data()
         )
 
-        return f"{config}graph {self.orientation.value}\n{nodes}\n{edges}"  # type: ignore[return-value]
+        return f"{config}graph {self.orientation.value}\n{nodes}\n{edges}"  # type: ignore
