@@ -76,7 +76,7 @@ def main():
     print(markdown_diagram)
     print(html_diagram)
 
-    ## Save the HTML diagram to a file and serve it
+    # Save the HTML diagram to a file and serve it
     with TemporaryDirectory() as temp_dir:
         with open(f"{temp_dir}/index.html", 'w') as f:
             f.write(html_diagram)
