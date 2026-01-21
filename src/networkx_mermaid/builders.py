@@ -2,7 +2,7 @@ from functools import lru_cache
 from typing import Any
 
 import networkx as nx
-from mappingtools.collectors import AutoMapper
+from mappingtools.collectors import AutoMapper  # type: ignore[import-untyped]
 
 from .models import DiagramNodeShape, DiagramOrientation
 from .typing import MermaidDiagram
