@@ -96,15 +96,16 @@ class OriginalDiagramBuilder:
 # --- Benchmark Setup ---
 
 def generate_large_graph(num_nodes=1000, num_edges=2000):
-    G = nx.gnm_random_graph(num_nodes, num_edges)
+    graph = nx.gnm_random_graph(num_nodes, num_edges)
     for i in range(num_nodes):
-        G.nodes[i]['label'] = f"Node {i}"
+        graph.nodes[i]['label'] = f"Node {i}"
         if i % 2 == 0:
-            G.nodes[i]['color'] = "#FF0000"
+            graph.nodes[i]['color'] = "#FF0000"
 
-    for u, v in G.edges():
-        G.edges[u, v]['label'] = f"Edge {u}-{v}"
-    return G
+    for u, v in graph.edges():
+        graph.edges[u, v]['label'] = f"Edge {u}-{v}"
+
+    return graph
 
 
 def run_benchmark():
@@ -112,16 +113,16 @@ def run_benchmark():
     num_nodes = 5000
     num_edges = 10000
     graph = generate_large_graph(num_nodes=num_nodes, num_edges=num_edges)
-    
+
     print(f"Benchmarking with {len(graph.nodes)} nodes and {len(graph.edges)} edges...")
-    
+
     # Setup builders
     original_builder = OriginalDiagramBuilder()
     new_builder = DiagramBuilder()
-    
+
     # Number of iterations
     number = 1000
-    
+
     # Benchmark Original
     original_time = timeit.timeit(lambda: original_builder.build(graph), number=number)
     avg_original = original_time / number
