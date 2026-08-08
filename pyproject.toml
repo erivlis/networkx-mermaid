@@ -45,7 +45,8 @@ bench = [
 ]
 dev = [
     "uv",
-    "ruff"
+    "ruff",
+    "commitizen>=4.17.0",
 ]
 docs = [
     "zensical",
