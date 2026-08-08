@@ -25,6 +25,7 @@
 [![DeepSource](https://app.deepsource.com/gh/erivlis/networkx-mermaid.svg/?label=resolved+issues&show_trend=true&token=CA0lpqHi7MBnUi3L3AIDlEsJ)](https://app.deepsource.com/gh/erivlis/networkx-mermaid/)
 
 [![Snyk](https://snyk.io/test/github/erivlis/networkx-mermaid/badge.svg)](https://snyk.io/test/github/erivlis/networkx-mermaid)
+[![CodSpeed](https://img.shields.io/endpoint?url=https://codspeed.io/badge.json)](https://app.codspeed.io/erivlis/networkx-mermaid?utm_source=badge)
 
 <a href="https://www.jetbrains.com/pycharm/"><img alt="PyCharm" src="https://img.shields.io/badge/PyCharm-FCF84A.svg?logo=PyCharm&logoColor=black&labelColor=21D789&color=FCF84A"></a>
 <a href="https://github.com/astral-sh/uv"><img alt="uv" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json" style="max-width:100%;"></a>

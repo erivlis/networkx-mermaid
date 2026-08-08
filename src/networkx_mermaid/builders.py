@@ -32,8 +32,15 @@ def _contrast_color(color: str) -> str:
     if not (isinstance(color, str) and color.startswith("#") and len(color) == 7):
         raise ValueError(f"Invalid color format: {color}. Expected a 6-digit hex code.")
 
-    r, g, b = int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)
-    return "#000000" if (r * 0.299 + g * 0.587 + b * 0.114) > 186 else "#ffffff"
+    # Parsing hex string as single integer with bitwise operations is faster than string slicing
+    rgb = int(color[1:], 16)
+    r = (rgb >> 16) & 0xFF
+    g = (rgb >> 8) & 0xFF
+    b = rgb & 0xFF
+
+    # Using scaled integer arithmetic (x1000) instead of floating point math
+    # Threshold: 186 * 1000 = 186000
+    return "#000000" if (r * 299 + g * 587 + b * 114) > 186000 else "#ffffff"
 
 
 def _node_style(node_id: str, data: dict[str, Any]) -> str:
@@ -114,13 +121,17 @@ class DiagramBuilder:
         bra, ket = self.node_shape.value
 
         minifier = AutoMapper()
+        # Hoist the get method to a local variable to avoid repeated attribute lookups in the loop
+        minifier_get = minifier.get
 
-        # Pre-calculate node IDs to avoid repeated function calls
-        node_map = {u: minifier.get(u) for u in graph.nodes()}
+        node_map = {}
+        nodes_list = []
+        for u, d in graph.nodes.data():
+            mapped_u = minifier_get(u)
+            node_map[u] = mapped_u
+            nodes_list.append(f"{mapped_u}{bra}{d.get('label', u)}{ket}{_node_style(mapped_u, d)}")
 
-        nodes = "\n".join(
-            f"{node_map[u]}{bra}{d.get('label', u)}{ket}{_node_style(node_map[u], d)}" for u, d in
-            graph.nodes.data())
+        nodes = "\n".join(nodes_list)
 
         _edges = ((node_map[u], node_map[v], d) for u, v, d in graph.edges.data())
         edges = "\n".join(f"{u} -->{_edge_label(d) if with_edge_labels else ''} {v}" for u, v, d in _edges)
