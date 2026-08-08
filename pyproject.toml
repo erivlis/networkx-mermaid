@@ -1,19 +1,18 @@
 [project]
 name = "networkx-mermaid"
-version = "0.3.0"
+version = "0.3.1"
 description = "Create a Mermaid graph from a NetworkX graph"
 authors = [
     { name = "Eran Rivlis", email = "eran@rivlis.info" },
 ]
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Intended Audience :: Information Technology",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -46,13 +45,15 @@ bench = [
 ]
 dev = [
     "uv",
-    "ruff"
+    "ruff",
+    "commitizen>=4.17.0",
 ]
 docs = [
     "zensical",
     "mkdocstrings-python"
 ]
 test = [
+    "markdown-pytest",
     "pytest",
     "pytest-asyncio",
     "pytest-cov",
@@ -69,9 +70,6 @@ allow-direct-references = true
 
 [tool.hatch.envs.default]
 installer = "uv"
-
-#[tool.hatch.build.targets.wheel]
-#packages = ["src/networkx-mermaid"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

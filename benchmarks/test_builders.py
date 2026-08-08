@@ -3,7 +3,7 @@
 import networkx as nx
 
 from networkx_mermaid import DiagramNodeShape, DiagramOrientation
-from networkx_mermaid.builders import DiagramBuilder, _contrast_color, _edge_label, _node_style
+from networkx_mermaid.builders import DiagramBuilder, _contrast_color
 
 COLORS = [f"#{r:02x}{g:02x}{b:02x}" for r in range(0, 256, 32) for g in range(0, 256, 32) for b in range(0, 256, 32)]
 
@@ -72,13 +72,3 @@ def test_contrast_color_warm_cache(benchmark):
         _contrast_color(color)
 
     assert benchmark(lambda: [_contrast_color(color) for color in COLORS])
-
-
-def test_node_style(benchmark):
-    data = {"color": "#FFCCCC", "label": "Node"}
-    assert benchmark(_node_style, "A", data)
-
-
-def test_edge_label(benchmark):
-    data = {"label": "edge"}
-    assert benchmark(_edge_label, data)
