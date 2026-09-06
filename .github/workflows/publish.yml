@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   deploy:
@@ -17,7 +18,6 @@ jobs:
       # Required for Trusted Publishing / OIDC authentication
       id-token: write
       contents: read
-
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
