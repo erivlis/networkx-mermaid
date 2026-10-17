@@ -2,6 +2,8 @@
 
 > Create a Mermaid graph from a NetworkX graph
 
+<img alt="networkx-mermaid Logo" loading="lazy" src="https://erivlis.github.io/networkx-mermaid/images/logo.svg">
+
 <img alt="PyPI - Version" class="off-glb" loading="lazy" src="https://img.shields.io/pypi/v/networkx-mermaid.svg?logo=pypi&logoColor=lightblue">
 <img alt="PyPI - Status" class="off-glb" loading="lazy" src="https://img.shields.io/pypi/status/networkx-mermaid.svg?logo=pypi&logoColor=lightblue">
 <img alt="PyPI - Python Version" class="off-glb" loading="lazy" src="https://img.shields.io/pypi/pyversions/networkx-mermaid.svg?logo=python&label=Python&logoColor=lightblue">
